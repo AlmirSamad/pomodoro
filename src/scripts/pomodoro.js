@@ -1,8 +1,30 @@
+import { resetTimer } from './timer';
+
 const tabs = document.querySelectorAll('.timer-card__tab');
 
 const page = document.querySelector('.page');
 
 const modeImage = document.querySelector('.banner img');
+
+const bannerTitleText = document.querySelector('.banner__title--text');
+const bannerTitleHighlight = document.querySelector(
+  '.banner__title--highlight',
+);
+
+const contexto = {
+  1: {
+    title: 'Frase genérica',
+    highlight: 'que nós sabemos que ngm vai ligar',
+  },
+  2: {
+    title: 'Não estudou nada,',
+    highlight: 'mas faz a pausa do tiktok. Seu viciado',
+  },
+  3: {
+    title: 'TIKTOK TIMEEEE!!!!',
+    highlight: 'Faz ai a merda da sua pausa',
+  },
+};
 
 let mode = 1;
 
@@ -21,8 +43,14 @@ tabs.forEach((tab) => {
     });
 
     const imageModeSrc = `/mode-${mode}.png`;
+    const modeContext = contexto[mode];
+
+    bannerTitleText.textContent = modeContext.title;
+    bannerTitleHighlight.textContent = modeContext.highlight;
 
     modeImage.setAttribute('src', imageModeSrc);
+
+    resetTimer(mode);
 
     event.currentTarget.disabled = true;
     event.currentTarget.classList.add('timer-card__tab--active');
